@@ -36,3 +36,17 @@ services:
       - ./qbittorrent/data:/data
       - /media/wd_ssd/Library:/media
     restart: unless-stopped
+  plex:
+    container_name: plex
+    image: lscr.io/linuxserver/plex:latest
+    network_mode: host  # required for DLNA and discovery
+    environment:
+      - PUID=0
+      - PGID=0
+      - VERSION=docker
+      - TZ=Asia/Kolkata
+    volumes:
+      - ./plex/config:/config
+      - /media/wd_ssd/Library/Series:/tv
+      - /media/wd_ssd/Library/Movies:/movies
+    restart: unless-stopped

@@ -1,5 +1,6 @@
 # Ignore everything inside qbittorrent/
 qbittorrent/**
+plex/**
 # But do not ignore directories, so README.md can be evaluated
 !**/
 # Do not ignore README.md files
