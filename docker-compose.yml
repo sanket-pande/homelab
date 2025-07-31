@@ -34,3 +34,4 @@ services:
     volumes:
       - ./qbittorrent:/config
       - ./qbittorrent/data:/data
+    restart: unless-stopped
