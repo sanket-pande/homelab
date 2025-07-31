@@ -1,0 +1,1 @@
+put wg0.conf file in this folder

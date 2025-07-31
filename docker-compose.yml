@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  qbittorrent:
+    container_name: qbittorrent
+    image: ghcr.io/hotio/qbittorrent:latest
+    ports:
+      - "8080:8080"  # Web UI
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Asia/Kolkata
+      - WEBUI_PORTS=8080/tcp,8080/udp
+      - LIBTORRENT=v1
+      # --- VPN ---
+      - VPN_ENABLED=true
+      - VPN_CONF=wg0
+      - VPN_PROVIDER=generic
+      - VPN_LAN_NETWORK=192.168.1.0/24
+      - VPN_LAN_LEAK_ENABLED=false
+      - VPN_EXPOSE_PORTS_ON_LAN=8080/tcp
+      - VPN_AUTO_PORT_FORWARD=false
+      - VPN_AUTO_PORT_FORWARD_TO_PORTS=""
+      - VPN_FIREWALL_TYPE=auto
+      - VPN_HEALTHCHECK_ENABLED=false
+      - PRIVOXY_ENABLED=false
+      - UNBOUND_ENABLED=false
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      net.ipv4.conf.all.src_valid_mark: 1
+      net.ipv6.conf.all.disable_ipv6: 1
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+      - ./qbittorrent:/config
+      - ./qbittorrent/data:/data

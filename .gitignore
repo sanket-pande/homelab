@@ -1,0 +1,6 @@
+# Ignore everything inside qbittorrent/
+qbittorrent/**
+# But do not ignore directories, so README.md can be evaluated
+!**/
+# Do not ignore README.md files
+!**/README.md
